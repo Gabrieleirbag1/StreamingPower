@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "Pixel Emulator" ;
+    src: url(fonts/PixelEmulator-xq08.ttf);
+	font-style: normal;
+	font-weight: 100;
+}
+
+@charset "utf-8";
+/* CSS Document */
+
+body{
+background-image:url(images/background.gif);
+background-size: cover;
+font-family: "Pixel Emulator";
+color:#FFFF00;
+text-align:center;
+}
+
+h1{ 
+font-family: "Pixel Emulator";
+font-weight: 100;
+margin: auto;
+padding-top: 100px;
+padding-bottom: 0px;
+}
+
+h2{
+margin: auto;
+padding: 0px 0;
+}
+
+marquee{
+color:#006600;
+}
+
+.uwu {
+padding-top: 150px;
+}
+
+a:link, a:visited{
+color:#FFFFFF;
+}
+a:hover{
+font-weight:bold;
+}

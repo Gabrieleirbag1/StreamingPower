@@ -1,0 +1,27 @@
+
+
+@charset "utf-8";
+/* CSS Document */
+
+body{
+background-image:url(images/space.gif);
+background-size: cover;
+font-family: "Comic Sans MS";
+color:#FFFF00;
+text-align:center;
+}
+
+marquee{
+color:#006600;
+}
+
+.uwu {
+padding-top: 150px;
+}
+
+a:link, a:visited{
+color:#FFFFFF;
+}
+a:hover{
+font-weight:bold;
+}
