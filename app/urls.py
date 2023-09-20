@@ -2,32 +2,35 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.nothome),
-    path('nothome', views.nothome),
-    path('nothome/', views.nothome),
 
-    path("affiche/", views.affiche),
+    path('', views.index),
+    path('nggyu', views.nggyu),
+    path('old', views.old),
 
-    path("home/admin", views.register),
-    path("login_user", views.login_user),
-    path("logout_user", views.logout_user),
-    path("home/login_user", views.login_user),
-    path("home/logout_user", views.logout_user),
 
-    path('home', views.home),
-    path('home/', views.home),
+    path('streamingpower/', views.nothome),
+    path('streamingpower', views.nothome),
 
-    path('update/<int:id>/',views.update),
-    path('propterre/update/<int:id>/',views.update),
-    path('home/admin/delete/<int:id>/', views.delete),
-    path('home/admin/deleteuser/<str:username>/', views.deleteuser),
-    path('traitement/', views.traitement),
+    path("streamingpower/home/admin", views.register),
+    path("streamingpower/login_user", views.login_user),
+    path("streamingpower/logout_user", views.logout_user),
+    path("streamingpower/home/login_user", views.login_user),
+    path("streamingpower/home/logout_user", views.logout_user),
 
-    path('films',views.films),
-    path('films/',views.films),
+    path('streamingpower/home', views.home),
+    path('streamingpower/home/', views.home),
 
-    path('series',views.series),
-    path('series/',views.series),
+    path('streamingpower/update/<int:id>/',views.update),
+    path('streamingpower/propterre/update/<int:id>/',views.update),
+    path('streamingpower/home/admin/delete/<int:id>/', views.delete),
+    path('streamingpower/home/admin/deleteuser/<str:username>/', views.deleteuser),
+    path('streamingpower/propterre/traitement/', views.traitement),
+
+    path('streamingpower/films',views.films),
+    path('streamingpower/films/',views.films),
+
+    path('streamingpower/series',views.series),
+    path('streamingpower/series/',views.series),
 
 
 ]

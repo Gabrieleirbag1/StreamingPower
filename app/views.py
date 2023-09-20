@@ -6,30 +6,25 @@ from propterre.models import Ide
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import user_passes_test, login_required
-
+from django.urls import reverse
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
-@login_required(login_url='/login_user')
+@login_required(login_url='/streamingpower/login_user')
 def films(request):
-    return render(request, 'propterre/films.html')
+     return render(request, 'propterre/films.html')
 
-@login_required(login_url='/login_user')
+@login_required(login_url='/streamingpower/login_user')
 def series(request):
-    return render(request, 'propterre/series.html')
+     return render(request, 'propterre/series.html')
 
-@login_required(login_url='/login_user')
+@login_required(login_url='/streamingpower/login_user')
 def head(request):
-    return render(request, 'propterre/head.html')
+     return render(request, 'propterre/head.html')
 
-@login_required(login_url='/login_user')
+@login_required(login_url='/streamingpower/login_user')
 def home(request):
-    return render(request, 'propterre/home.html')
-
-
-def affiche(request):
-    return render(request, 'propterre/affiche.html')
-
-
+     return render(request, 'propterre/home.html')
 
 def nothome(request):
     return render(request, 'propterre/nothome.html')
@@ -68,7 +63,7 @@ def login_user(request):
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
-            # check if user is "admin"
+            # Vérifier si l'utilisateur est "admin"
             if user.is_superuser:
                 auth.login(request, user)
                 return redirect(register)
@@ -82,8 +77,6 @@ def login_user(request):
 
     else:
         return render(request, 'propterre/login.html')
-
-
 
 def logout_user(request):
     auth.logout(request)
@@ -143,3 +136,17 @@ def deleteuser(request, username):
     user_to_delete.delete()
     return redirect(register)
 
+
+
+'''______________________________________________________________________'''
+
+
+
+def index(request):
+    return render (request, "wizzies_site/index.html")
+
+def nggyu(request):
+    return render (request, "wizzies_site/nggyu.html")
+
+def old(request):
+    return render (request, "wizzies_site/old.html")
