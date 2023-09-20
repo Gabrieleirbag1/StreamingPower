@@ -1,0 +1,121 @@
+
+    {% extends 'propterre/head.html' %}
+
+    {% load static %}
+    
+    {% block HEAD %}
+    {% endblock %}
+       
+    {% block content %}
+        <div class='tout'>
+
+            <div class="carou">
+                <div class="imgdiv"> <a href='http://lizziewizzie.site/films_et_series/Heat%20(1995)%20%5b1080p%5d/Heat.1995.1080p.BRrip.x264.YIFY.mp4' draggable="false">
+                    <img src="/static/propterre/images/affiches/heat.webp" draggable="false"></a> </div>
+                
+                <div class="imgdiv"> <a href='http://lizziewizzie.site/films_et_series/Memento%20(2000)/Memento.2000.720p.BluRay.x264.YIFY.mp4' draggable="false">
+                    <img src="/static/propterre/images/affiches/memento.jpg" draggable="false"> </a> </div>
+            
+                <div class="imgdiv"> <a href='http://lizziewizzie.site/films_et_series/Into.The.Wild.2007.720p.BrRip.x264.YIFY.mp4' draggable="false">
+                    <img src="/static/propterre/images/affiches/intothewild.jpg" draggable="false"> </a> </div>
+            
+                <div class="imgdiv"> <a href='http://lizziewizzie.site/films_et_series/The.Batman.2022.1080p.WEBRip.x265-RARBG.mp4' draggable="false">
+                    <img src="/static/propterre/images/affiches/batman.jpg" draggable="false"> </a> </div>
+            
+                <div class="imgdiv"> <a href='http://lizziewizzie.site/films_et_series/The.Bridge.on.the.River.Kwai.1957.1080p.BluRay.x264.YIFY.mp4' draggable="false">
+                    <img src="/static/propterre/images/affiches/kwai.jpg" draggable="false"> </a> </div>
+
+                <div class="imgdiv"> <a href='http://lizziewizzie.site/films_et_series/Vertigo.1958.1080p.BluRay.x264.YIFY.mp4' draggable="false">
+                    <img src="/static/propterre/images/affiches/Vertigo.jpg" draggable="false"> </a> </div>
+            </div>
+      
+        </div>
+
+        <script>
+            const videoLinks = document.querySelectorAll('.imgdiv a');
+            const navbarButton = document.getElementById('navbarButton');
+            const imgtv = document.getElementById('imgtv');
+            let isNavbarActive = false;
+            
+            // Vérifier si la navbar est active
+            function checkNavbarActive() {
+                return navbarButton.getAttribute('aria-expanded') === 'true';
+            }
+            
+            navbarButton.addEventListener('click', function() {
+                isNavbarActive = !isNavbarActive;
+            });
+            
+            videoLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+            
+                    const videoSrc = this.getAttribute('href');
+                    const videoPlayer = videojs('my-video');
+            
+                    videoPlayer.src({
+                        src: videoSrc,
+                        type: 'video/mp4'
+                    });
+            
+                    // Si la navbar n'est pas active, la déployer en cliquant sur le bouton
+                    if (!isNavbarActive) {
+                        navbarButton.click();
+                    }
+            
+                    videoPlayer.play();
+            
+                    // Défiler automatiquement vers l'élément avec l'ID 'imgtv'
+                    imgtv.scrollIntoView({ behavior: 'smooth' });              
+                });
+            });
+            
+            
+
+            const videoPlayer = videojs('my-video');
+        
+            // Fonction pour mettre en pause/lecture la vidéo
+            document.getElementById('btn-pause').addEventListener('click', function() {
+                if (videoPlayer.paused()) {
+                    videoPlayer.play();
+                } else {
+                    videoPlayer.pause();
+                }
+            });
+        
+            // Fonction pour gérer le volume
+            document.getElementById('btn-volume').addEventListener('click', function() {
+                if (videoPlayer.muted()) {
+                    videoPlayer.muted(false);
+                } else {
+                    videoPlayer.muted(true);
+                }
+            });
+        
+            // Fonction pour activer le mode Picture-in-Picture
+            document.getElementById('btn-pip').addEventListener('click', function() {
+                if (videoPlayer !== document.pictureInPictureElement) {
+                    videoPlayer.requestPictureInPicture();
+                } else {
+                    document.exitPictureInPicture();
+                }
+            });
+        
+            // Fonction pour passer en mode plein écran
+            document.getElementById('btn-fullscreen').addEventListener('click', function() {
+                if (videoPlayer.requestFullscreen) {
+                    videoPlayer.requestFullscreen();
+                } else if (videoPlayer.webkitRequestFullscreen) { // Safari
+                    videoPlayer.webkitRequestFullscreen();
+                } else if (videoPlayer.msRequestFullscreen) { // Internet Explorer
+                    videoPlayer.msRequestFullscreen();
+                }
+            });
+            
+
+          </script>
+          
+    {% endblock %}
+
+
+<!--{{l.date_parution|date:"d/m/Y"}} -->

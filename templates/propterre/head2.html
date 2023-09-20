@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    {% load static %}
+    
+        <title> STREAMING POWER </title>
+        <link rel="icon" type="image/png" href="/static/propterre/images/gameboy.png">
+        <link rel="stylesheet" type="text/css" href="{% static 'BOOTSTRAP/css_BOOTSTRAP/bootstrap.min.css' %}" >
+        <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{%static 'propterre/indexiou.css'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&display=swap" rel="stylesheet">
+        
+
+
+        <!-- <script src="{% static 'propterre/indexiou.js' %}"></script> -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+        <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="{% static 'BOOTSTRAP/js_BOOTSTRAP/bootstrap.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {% block HEAD2 %}
+    {% endblock %}
+    </head>
+
+    <body id="background">
+    <header>
+        {% block HEADER2 %}
+        <div class="maintitre">
+            <div class="titrediv"> 
+                <a class="liensecret" draggable="false" href="https://www.youtube.com/watch?v=by15qF9vdWA&pp=ygUQZ3JvcyB0YXMgZGUgZ3Jhcw%3D%3D">
+                    <img class="titre" src="/static/propterre/images/nintendo.png" draggable="false">
+                </a>
+            </div>
+        </div>
+        
+        <div class="pos-f-t">
+            
+            <nav class="navbar navbar-dark navbarvid">
+                <button id="navbarButton" class="button4" type="button">
+                    <a class="linkcon" href="/logout_user"> <span class="DECONNEXION"> DECONNEXION </span> </a>
+                </button>
+                <div class="ttee">
+                    <div class="ttee2">
+                      <a class="nav-item nav-link active" draggable="false" href="/home">
+                        <button type="button" class="button">Home <span class="sr-only">(current)</span></button>
+                    </a>
+                        <a class="nav-item nav-link active" draggable="false" href="/films">
+                            <button type="button" class="button">Films <span class="sr-only">(current)</span></button>
+                        </a>
+                        <a class="nav-item nav-link" draggable="false" href="/series">
+                            <button type="button" class="button">Séries <span class="sr-only">(current)</span></button>
+                        </a>
+                    </div>
+                    <div class="dropdown imgbouge">
+                        <div class="imgbougepas">
+                        <img src="{% static 'propterre/images/profil.jpg' %}" type="image/jpg" class="rounded-circle dropdown-toggle" id="userimg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" draggable="false"> 
+                        <div>
+                            <div class="dropdown-menu bg dark" aria-labelledby="userimg">
+                                {% if user.is_superuser and user.is_authenticated %}
+                                <a class="dropdown-item" href="/home/admin" draggable="false">Administration</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="#" draggable="false">Profil</a>
+                                <a class="dropdown-item" href="#" draggable="false">Paramètres</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout_user" draggable="false">Déconnexion</a>
+                            </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        {% endblock %}
+    </header>
+
+    {% block content2 %}
+
+    {% endblock %}
+    
+    {% block FOOTER2 %}
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <form method="post" action="/propterre/traitement/">
+                            {% csrf_token %}
+                            <h3>Propositions d'idées <button type="submit" class="custom-btn btn btn-14">Ok</button></h3> 
+                            <fieldset class="form-group">
+                                <label for="{{ form.identifiant.id_for_label }}"></label>
+                                {{ ide_form.identifiant }}
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="{{ form.film.id_for_label }}"></label>
+                                {{ ide_form.film }}
+                            </fieldset>
+                            {% for message in messages %}
+                            <div class="alert alert-danger" id="error-section" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        </form>
+                        
+                      </div>
+                    <div class="col-md-6 item text">
+                        <h3>KDLK Corporation</h3>
+                        <p>Plongez dans une expérience de divertissement ultime avec notre entreprise innovante et dynamique. Nous sommes votre destination de streaming, offrant une vaste gamme de contenus captivants et exclusifs. Explorez le monde du divertissement sans limites, avec une plateforme conçue pour les esprits curieux et les amateurs de nouvelles sensations.</p>
+                    </div>
+                    <div class="col item social"><a href="https://github.com/Gabrieleirbag1?tab=repositories"><i class="icon ion-social-github"></i></a><a href="https://twitter.com/MajesticG"><i class="icon ion-social-twitter"></i></a><a href="https://www.youtube.com/@lekakadelakaroteoficiel8903"><i class="icon ion-social-youtube"></i></a><a href="https://www.instagram.com/zurgloxleterrible"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">KDLK © 2023</p>
+                
+            </div>
+        </footer>
+  </div>
+{% endblock %}
+    </html> 

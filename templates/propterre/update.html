@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    {% load static %}
+    <title> Site web - Update</title>
+ 
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <div>
+
+                <form method="post" action="/propterre/update/{{id}}/">
+                {% csrf_token %}
+                {{ form.as_ul }} 
+
+            <p> <input type="submit" value="ENVOYER LES DONNÉES"\> </input> </p>
+                </form>
+                <a href="/propterre"> <button> Accéder à l'accueil  </button> </a>
+    </div>
+
+</body>
+</html>
