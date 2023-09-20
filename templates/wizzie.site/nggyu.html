@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html>
 <head>
-<link rel="stylesheet" href="nggyu.css">
+<link rel="stylesheet" href="{% static 'wizzie/nggyu.css' %}">
 </head>
 <body>
 
  <!-- The video -->
 <video autoplay loop id="myVideo">
-  <source src="/images/nggyu.mp4" type="video/mp4">
+  <source src="{% static 'wizzie/images/nggyu.mp4' %}" type="video/mp4">
 </video>
