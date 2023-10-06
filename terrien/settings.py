@@ -65,7 +65,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'propterre.context_processors.ide_form_context',  
+                'propterre.context_processors.ide_form_context',
+                'propterre.context_processors.user_profile_image',
+                'propterre.context_processors.user_imgid', 
+                'propterre.context_processors.sig_form_context',
+                'propterre.context_processors.ins_form_context',
             ],
         },
     },
@@ -125,6 +129,8 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
