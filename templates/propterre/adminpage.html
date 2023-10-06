@@ -16,7 +16,6 @@
 
 
         <!-- <script src="{% static 'propterre/indexiou.js' %}"></script> -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
         <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -32,7 +31,7 @@
     </head>
 
 <body class="adminpage">
-	<header>
+    <header>
         <div class="maintitre">
             <div class="titrediv"> 
                 <a class="liensecret" draggable="false" href="https://www.youtube.com/watch?v=by15qF9vdWA&pp=ygUQZ3JvcyB0YXMgZGUgZ3Jhcw%3D%3D">
@@ -43,61 +42,35 @@
         
         <div class="pos-f-t">
             
-            <div class="collapse" id="navbarToggleExternalContent">
-                <div class="p-4" id="bigtv">
-                    <div class="vidiv">
-                        <div class="video-container">
-                            <img id="imgtv" src="/static/propterre/images/tv.png" draggable="false">
-                            <video id="my-video" class="video-js" controls preload="auto" width="800" height="500" poster="/static/propterre/images/tv-static.gif" data-setup="{}">
-                                <source src="" type="video/mp4" />
-                            </video>
-                        </div>
-                        <div class="divbouttons" id="divbutton">
-                            <div class="bouttons">
-                                <!-- Bouton Pause -->
-                                <button class="vidb" id="btn-pause"><img src="/static/propterre/images/pause.svg" draggable="false"></button>
-                            
-                                <!-- Bouton Volume -->
-                                <button class="vidb" id="btn-volume"><img src="/static/propterre/images/notmute.svg" draggable="false"></button>
-                            
-                                <!-- Bouton Picture-in-Picture -->
-                                <button class="vidb" id="btn-pip"><img src="/static/propterre/images/picture.svg" draggable="false"></button>
-                            
-                                <!-- Bouton Plein écran -->
-                                <button class="vidb" id="btn-fullscreen"><img src="/static/propterre/images/fullscreen.svg" draggable="false"></button>
-                            </div>
-                        </div>
-                    </div>
-                
-                      
-                </div>
-            </div>
             <nav class="navbar navbar-dark navbarvid">
-                <button id="navbarButton" class="button2" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button id="navbarButton" class="button4" type="button">
+                    <a class="linkcon" href="/streamingpower/logout_user"> <span class="DECONNEXION"> DECONNEXION </span> </a>
                 </button>
                 <div class="ttee">
                     <div class="ttee2">
-                        <a class="nav-item nav-link active" draggable="false" href="/home">
-                            <button type="button" class="button">Home <span class="sr-only">(current)</span></button>
-                        </a>
-                        <a class="nav-item nav-link active" draggable="false" href="/films">
+                      <a class="nav-item nav-link active" draggable="false" href="/streamingpower/home">
+                        <button type="button" class="button">Home <span class="sr-only">(current)</span></button>
+                    </a>
+                        <a class="nav-item nav-link active" draggable="false" href="/streamingpower/films">
                             <button type="button" class="button">Films <span class="sr-only">(current)</span></button>
                         </a>
-                        <a class="nav-item nav-link" draggable="false" href="/series">
+                        <a class="nav-item nav-link" draggable="false" href="/streamingpower/series">
                             <button type="button" class="button">Séries <span class="sr-only">(current)</span></button>
                         </a>
                     </div>
                     <div class="dropdown imgbouge">
                         <div class="imgbougepas">
-                        <img src="{% static 'propterre/images/profil.jpg' %}" type="image/jpg" class="rounded-circle dropdown-toggle" id="userimg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" draggable="false"> 
+                        <img src="{{ user_profile_image_url }}" type="image/jpg" class="rounded-circle dropdown-toggle" id="userimg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" draggable="false"> 
                         <div>
-                        <div class="dropdown-menu bg dark" aria-labelledby="userimg">
-                            <a class="dropdown-item" href="#" draggable="false">Profil </a>
-                            <a class="dropdown-item" href="#" draggable="false">Paramètres</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout_user" draggable="false">Déconnexion</a>
-                        </div>
+                            <div class="dropdown-menu bg dark" aria-labelledby="userimg">
+                                {% if user.is_superuser and user.is_authenticated %}
+                                <a class="dropdown-item" href="/streamingpower/home/admin" draggable="false">Administration</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="/streamingpower/profil/{{user_imgid}}" draggable="false">Profil</a>
+                                <a class="dropdown-item" href="#" draggable="false">Paramètres</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/streamingpower/logout_user" draggable="false">Déconnexion</a>
+                            </div>
                     </div>
                 </div>
             </nav>
@@ -114,7 +87,7 @@
                     <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal{{ user.id }}">×</button>
                 </p>
                 <p class="userp">{{ user.username }}</p>
-                <img src="{% static 'propterre/images/profil.jpg' %}" type="image/jpg" class="rounded-circle dropdown-toggle" id="userimg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" draggable="false">
+                                       <img src="{% static 'propterre/images/profil.jpg' %}" type="image/jpg" class="rounded-circle dropdown-toggle" id="userimg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" draggable="false">
                 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ user.id }}" aria-hidden="true">
@@ -131,7 +104,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-dang btn-outline-primary" data-dismiss="modal">Annuler</button>
-                                <a href="/home/admin/deleteuser/{{ user.username }}"><button type="button" class="btn btn-outline-danger">Oui</button></a>
+                                <a href="/streamingpower/home/admin/deleteuser/{{ user.username }}"><button type="button" class="btn btn-outline-danger">Oui</button></a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +119,7 @@
 		
 
 		<div class="form">
-			<form action="/home/admin" method="POST" class="form-horizontal">
+			<form action="/streamingpower/home/admin" method="POST" class="form-horizontal">
 				{% csrf_token%}
 				<div class="mx-auto" style="width: 400px;">
                     <h2 style="text-align:center;">CRÉER UN UTILISATEUR</h2>
@@ -171,7 +144,7 @@
 					</div>
                     <div class="btndiv">
 					<button type="submit" class="custom-btn btn-9">SIGN UP</button>
-					<a class="btnlink custom-btn btn-91" href="login_user" role="button">LOGIN</a>
+					<a class="btnlink custom-btn btn-91" href="/streamingpower/login_user" role="button">LOGIN</a>
                     </div>
                 </div>
 				<div class="form-g">
@@ -200,7 +173,7 @@
 					  <tr>
 						<td>{{ ide.identifiant}} </td>
 						<td>{{ ide.film}}</td>
-						<td><a href='/home/admin/delete/{{ ide.id }}'><button type="button" class="btn btn-outline-danger">Supprimer</button></a></td>
+						<td><a href='/streamingpower/home/admin/delete/{{ ide.id }}'><button type="button" class="btn btn-outline-danger">Supprimer</button></a></td>
 					  </tr>
 					</tbody>
 					{% endfor %}
@@ -210,71 +183,201 @@
 
 		</div>
 	</div>	
-		
-		
+    <div class="semitout">
+			
+
+        <div class="idees3">
+            <table class="table table2 table-striped table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Mot de passe</th>
+                    <th scope="col">Motif</th>
+                  </tr>
+                </thead>
+                {% for ins in Ins_charge %}
+                <tbody>
+                  <tr>
+                    <td>{{ ins.pseudo}} </td>
+                    <td>{{ ins.mdp}}</td>
+                    <td>{{ ins.motif}}
+                    <td><a href='/streamingpower/home/admin/deleteins/{{ ins.id }}'><button type="button" class="btn btn-outline-danger">Supprimer</button></a></td>
+                  </tr>
+                </tbody>
+                {% endfor %}
+              </table>
+            {% csrf_token%}
+        </div>
+
+        <div class="idees3">
+            <table class="table table2 table-striped table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Problème</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                {% for sig in Sig_charge %}
+                <tbody>
+                  <tr>
+                    <td>{{ sig.probleme}} </td>
+                    <td>{{ sig.media}}</td>
+                    <td>{{ sig.nom_media_ou_page}}</td>
+                    <td>{{ sig.description}}</td>
+                    <td><a href='/streamingpower/home/admin/deletesig/{{ sig.id }}'><button type="button" class="btn btn-outline-danger">Supprimer</button></a></td>
+                  </tr>
+                </tbody>
+                {% endfor %}
+              </table>
+            {% csrf_token%}
+        </div>
+
+    </div>
+</div>	
+    
+    
 </div>
 
 
 
 <div class="footer-dark">
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-3 item">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Web design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Hosting</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-md-3 item">
-                  <form method="post" action="/propterre/traitement/">
-                      {% csrf_token %}
-                      <h3>Propositions d'idées <button type="submit" class="custom-btn btn btn-14">Ok</button></h3> 
-                      <fieldset class="form-group">
-                          <label for="{{ form.identifiant.id_for_label }}"></label>
-                          {{ ide_form.identifiant }}
-                      </fieldset>
-                      <fieldset class="form-group">
-                          <label for="{{ form.film.id_for_label }}"></label>
-                          {{ ide_form.film }}
-                      </fieldset>
-                      {% for message in messages %}
-                      <div class="alert alert-danger" id="error-section" role="alert">
-                          {{ message }}
-                      </div>
-                      {% endfor %}
-                  </form>
-                  
-                </div>
-              <div class="col-md-6 item text">
-                  <h3>KDLK CORPORATION</h3>
-                  <p>Plongez dans une expérience de divertissement ultime avec notre entreprise innovante et dynamique. Nous sommes votre destination de streaming, offrant une vaste gamme de contenus captivants et exclusifs. Explorez le monde du divertissement sans limites, avec une plateforme conçue pour les esprits curieux et les amateurs de nouvelles sensations.</p>
-              </div>
-              <div class="col item social"><a class="git" href="https://github.com/Gabrieleirbag1?tab=repositories"><i class="icon ion-social-github"></i></a><a class="git" href="https://twitter.com/MajesticG"><i class="icon ion-social-twitter"></i></a><a class="git"href="https://www.youtube.com/@lekakadelakaroteoficiel8903"><i class="icon ion-social-youtube"></i></a><a class="git" href="https://www.instagram.com/zurgloxleterrible"><i class="icon ion-social-instagram"></i></a></div>
-          </div>
-          <p class="copyright">KDLK © 2023</p>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-3 item">
+                <h3>Services</h3>
+                <ul>
+                  <li><a href="http://lizziewizzie.site" type="button" class="displaya rounded-circle"> <img src="{% static "propterre/images/house.svg" %}" draggable='false'></a>Site web de l'hôte</li>
+                    <li><a class="displaya rounded-circle" type="button" data-toggle="modal" data-target="#exampleModal"><img src="{% static "propterre/images/account.svg" %}" draggable='false'></a>Demander à rejoindre</li>
+                    <li><a type="button" class="displaya rounded-circle" data-toggle="modal" data-target="#exampleModalsignal"><img src="{% static "propterre/images/report.svg" %}" draggable='false' class=""></a>Signaler un problème</li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3 item">
+              <form method="post" action="/streamingpower/propterre/traitement/">
+                  {% csrf_token %}
+                  <h3>Propositions d'idées <button type="submit" class="custom-btn btn btn-14">Ok</button></h3> 
+                  <fieldset class="form-group">
+                      <label for="{{ form.identifiant.id_for_label }}"></label>
+                      {{ ide_form.identifiant }}
+                  </fieldset>
+                  <fieldset class="form-group">
+                      <label for="{{ form.film.id_for_label }}"></label>
+                      {{ ide_form.film }}
+                  </fieldset>
+                  {% for message in messages %}
+                  <div class="alert alert-danger" id="error-section" role="alert">
+                      {{ message }}
+                  </div>
+                  {% endfor %}
+              </form>
+            </div>
           
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalsignal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelsignal" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content bgalert">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabelsignal">Signaler un problème</h5>
+                          <button type="button" class="close1 btn-dang btn btn-danger" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="item" id='longueurinput'>
+                              <form method="post" action="/streamingpower/propterre/traitementsig/">
+                                  {% csrf_token %}
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.probleme.id_for_label }}"></label>
+                                      {{ sig_form.probleme }}
+                                  </fieldset>
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.media.id_for_label }}"></label>
+                                      {{ sig_form.media }}
+                                  </fieldset>
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.nom_media_ou_page.id_for_label }}"></label>
+                                      {{ sig_form.nom_media_ou_page }}
+                                  </fieldset>
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.description.id_for_label }}"></label>
+                                      {{ sig_form.description }}
+                                  </fieldset>
+                            </div>
+                      </div>
+                      <div class="modal-footer" id="btn-confirm">
+                          <button type="submit" class="custom-btn btn btn-14">Confirmer</button>
+                      </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content bgalert">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Obtenir un compte</h5>
+                          <button type="button" class="close1 btn-dang btn btn-danger" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="item" id='longueurinput'>
+                              <form method="post" action="/streamingpower/propterre/traitementins/">
+                                  {% csrf_token %}
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.pseudo.id_for_label }}"></label>
+                                      {{ ins_form.pseudo }}
+                                  </fieldset>
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.mdp.id_for_label }}"></label>
+                                      {{ ins_form.mdp }}
+                                  </fieldset>
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.verif_mdp.id_for_label }}"></label>
+                                      {{ ins_form.verif_mdp }}
+                                  </fieldset>
+                                  <fieldset class="form-group">
+                                      <label for="{{ form.motif.id_for_label }}"></label>
+                                      {{ ins_form.motif }}
+                                  </fieldset>
+                            </div>
+                      </div>
+                      <div class="modal-footer" id="btn-confirm">
+                          <button type="submit" class="custom-btn btn btn-14">Confirmer</button>
+                      </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-md-6 item text">
+              <h3>KDLK CORPORATION</h3>
+              <p>Plongez dans une expérience de divertissement ultime avec notre entreprise innovante et dynamique. Nous sommes votre destination de streaming, offrant une vaste gamme de contenus captivants et exclusifs. Explorez le monde du divertissement sans limites, avec une plateforme conçue pour les esprits curieux et les amateurs de nouvelles sensations.</p>
+          </div>
+          <div class="col item social"><a class="git" href="https://github.com/Gabrieleirbag1?tab=repositories"><i class="icon ion-social-github"></i></a><a class="git" href="https://twitter.com/MajesticG"><i class="icon ion-social-twitter"></i></a><a class="git"href="https://www.youtube.com/@lekakadelakaroteoficiel8903"><i class="icon ion-social-youtube"></i></a><a class="git" href="https://www.instagram.com/zurgloxleterrible"><i class="icon ion-social-instagram"></i></a></div>
       </div>
-  </footer>
+      <p class="copyright">KDLK © 2023</p>
+      
+  </div>
+</footer>
 </div>
 
 </body>
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-
-
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
 
 </html>

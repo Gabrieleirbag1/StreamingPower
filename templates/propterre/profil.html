@@ -1,0 +1,55 @@
+{% extends 'propterre/head2.html' %}
+
+{% load static %}
+
+{% block HEAD2 %}
+{% endblock %}
+    
+{% block content2 %}
+<div>
+    <div class="profildiv">
+        <div class="box">
+            <span class="borderLine"></span>
+            <form method="post" action="/streamingpower/profil/{{user_imgid}}/" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class='imgpp'>
+                    <img src="{{user_profile_image_url}}" type="image/jpg" class="rounded-circle dropdown-toggle userimgpp" id="userimg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" draggable="false"> 
+                    <p class="file-couille img-upload">
+                        <label for="id_fichier">
+                            <img id="imgdl" src="https://imgs.search.brave.com/pg1yDVHYRXBzTLg2d-VYbz-F4xT6HUwrscGSS97cyX4/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/c3ZncmVwby5jb20v/c2hvdy81MzA1Nzgv/dXBsb2FkLnN2Zw.svg"/>
+                        </label>
+                        <input type="file" name="fichier" accept="image/*" id="id_fichier" class="file-input">
+                        </p>
+                </div>
+                <p class="disparait">
+                    <label for="id_nom"></label>
+                    <input type="text" name="nom" value="u" autocomplete="off" placeholder="Entrez votre nom" required id="id_nom">
+                </p>
+    
+                <p class="disparait">
+                    {{form.imgid}}
+                </p>
+              <div class="inputBox">
+                <label for="mail"></label>
+                <label for="username"></label>
+                <input type="text" name="username" class="" autocomplete="off" required id="username" readonly="readonly">
+                <span>Identifiant</span>
+                <i></i>
+              </div>
+              <div class="inputBox">
+                <label for="mail"></label>
+                <input type="text" name="mail" class="" autocomplete="off" required id="mail" readonly="readonly">
+                <span>Mail</span>
+                <i></i>
+              </div>
+              <p id="psubmit"><input type="submit" value="CONFIRMER" /></p>
+            </form>
+            
+          </div>
+          </div>
+
+
+
+    </div>
+</div>
+{%endblock%}
