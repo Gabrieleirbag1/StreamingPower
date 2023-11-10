@@ -187,3 +187,13 @@ button:hover{
 }
 
 
+@media only screen and (max-width: 512px) {
+
+  #loginbody{
+    margin: 5%;
+  }
+
+
+  
+
+}
